@@ -17,7 +17,7 @@ import Image from '@ckeditor/ckeditor5-image/src/image';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import env from '@ckeditor/ckeditor5-utils/src/env';
 
-import PasteFromOffice from '../../src/pastefromoffice';
+import Pastefromdocuments from '../../src/pastefromdocuments';
 import { generateTests } from '../_utils/utils';
 
 const browsers = [ 'chrome', 'firefox', 'safari', 'edge' ];
@@ -28,7 +28,7 @@ describe( 'PasteFromOffice - integration', () => {
 		type: 'integration',
 		browsers,
 		editorConfig: {
-			plugins: [ Clipboard, Paragraph, Heading, Bold, Italic, Underline, Strikethrough, PasteFromOffice ]
+			plugins: [ Clipboard, Paragraph, Heading, Bold, Italic, Underline, Strikethrough, Pastefromdocuments ]
 		},
 		skip: {
 			safari: [ 'italicStartingText', 'multipleStylesSingleLine', 'multipleStylesMultiline' ] // Skip due to spacing issue (#13).
@@ -40,7 +40,7 @@ describe( 'PasteFromOffice - integration', () => {
 		type: 'integration',
 		browsers,
 		editorConfig: {
-			plugins: [ Clipboard, Paragraph, Image, Table, PasteFromOffice ]
+			plugins: [ Clipboard, Paragraph, Image, Table, Pastefromdocuments ]
 		},
 		skip: {
 			chrome: ( env.isEdge ? [ 'adjacentGroups' ] : [] ),
@@ -55,7 +55,7 @@ describe( 'PasteFromOffice - integration', () => {
 		type: 'integration',
 		browsers,
 		editorConfig: {
-			plugins: [ Clipboard, Paragraph, Heading, Bold, Link, ShiftEnter, PasteFromOffice ]
+			plugins: [ Clipboard, Paragraph, Heading, Bold, Link, ShiftEnter, Pastefromdocuments ]
 		},
 		skip: {
 			safari: [ 'combined' ] // Skip due to spacing issue (#13).
@@ -67,7 +67,7 @@ describe( 'PasteFromOffice - integration', () => {
 		type: 'integration',
 		browsers,
 		editorConfig: {
-			plugins: [ Clipboard, Paragraph, Heading, Bold, Italic, Underline, Link, List, PasteFromOffice ]
+			plugins: [ Clipboard, Paragraph, Heading, Bold, Italic, Underline, Link, List, Pastefromdocuments ]
 		},
 		skip: {
 			safari: [ 'heading3Styled' ] // Skip due to spacing issue (#13).
@@ -79,7 +79,7 @@ describe( 'PasteFromOffice - integration', () => {
 		type: 'integration',
 		browsers,
 		editorConfig: {
-			plugins: [ Clipboard, Paragraph, Bold, Italic, Underline, PasteFromOffice ]
+			plugins: [ Clipboard, Paragraph, Bold, Italic, Underline, Pastefromdocuments ]
 		}
 	} );
 
@@ -88,7 +88,7 @@ describe( 'PasteFromOffice - integration', () => {
 		type: 'integration',
 		browsers,
 		editorConfig: {
-			plugins: [ Clipboard, Paragraph, Bold, PasteFromOffice ]
+			plugins: [ Clipboard, Paragraph, Bold, Pastefromdocuments ]
 		}
 	} );
 
@@ -97,7 +97,7 @@ describe( 'PasteFromOffice - integration', () => {
 		type: 'integration',
 		browsers,
 		editorConfig: {
-			plugins: [ Clipboard, Paragraph, List, PasteFromOffice ]
+			plugins: [ Clipboard, Paragraph, List, Pastefromdocuments ]
 		}
 	} );
 
@@ -106,7 +106,7 @@ describe( 'PasteFromOffice - integration', () => {
 		type: 'integration',
 		browsers,
 		editorConfig: {
-			plugins: [ Clipboard, Paragraph, List, Table, Bold, PasteFromOffice ]
+			plugins: [ Clipboard, Paragraph, List, Table, Bold, Pastefromdocuments ]
 		}
 	} );
 } );

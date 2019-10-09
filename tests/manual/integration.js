@@ -13,7 +13,7 @@ import Underline from '@ckeditor/ckeditor5-basic-styles/src/underline';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import EasyImage from '@ckeditor/ckeditor5-easy-image/src/easyimage';
-import PasteFromOffice from '../../src/pastefromoffice';
+import Pastefromdocuments from '../../src/pastefromdocuments';
 
 import { stringify as stringifyView } from '@ckeditor/ckeditor5-engine/src/dev-utils/view';
 
@@ -25,7 +25,7 @@ const dataDiv = document.querySelector( '#data' );
 
 ClassicEditor
 	.create( document.querySelector( '#editor' ), {
-		plugins: [ ArticlePluginSet, Strikethrough, Underline, Table, TableToolbar, EasyImage, PasteFromOffice ],
+		plugins: [ ArticlePluginSet, Strikethrough, Underline, Table, TableToolbar, EasyImage, Pastefromdocuments ],
 		toolbar: [ 'heading', '|', 'bold', 'italic', 'strikethrough', 'underline', 'link',
 			'bulletedList', 'numberedList', 'blockQuote', 'insertTable', 'undo', 'redo' ],
 		cloudServices: CS_CONFIG

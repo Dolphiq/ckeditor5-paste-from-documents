@@ -28,7 +28,7 @@ import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
  *
  * @extends module:core/plugin~Plugin
  */
-export default class PasteFromOffice extends Plugin {
+export default class PasteFromDocuments extends Plugin {
 	/**
 	 * @inheritDoc
 	 */

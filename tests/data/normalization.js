@@ -5,14 +5,14 @@
 
 import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
 import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
-import PasteFromOffice from '../../src/pastefromoffice';
+import Pastefromdocuments from '../../src/pastefromdocuments';
 
 import { generateTests } from '../_utils/utils';
 
 const browsers = [ 'chrome', 'firefox', 'safari', 'edge' ];
 
 const editorConfig = {
-	plugins: [ Clipboard, PasteFromOffice, Paragraph ]
+	plugins: [ Clipboard, Pastefromdocuments, Paragraph ]
 };
 
 describe( 'PasteFromOffice - normalization', () => {

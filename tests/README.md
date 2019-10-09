@@ -131,7 +131,7 @@ generateTests( {
 	type: 'integration', // Tests type (integration or normalization).
 	browsers: [ 'chrome', 'firefox', 'safari', 'edge' ], // For which browsers generate tests.
 	editorConfig: { // Editor config which will be used during editor creation which is used in tests.
-		plugins: [ Clipboard, Paragraph, Heading, Bold, Italic, Underline, Strikethrough, PasteFromOffice ]
+		plugins: [ Clipboard, Paragraph, Heading, Bold, Italic, Underline, Strikethrough, Pastefromdocuments ]
 	},
 	skip: { // Names of fixtures which tests should be skipped (object `key` is the name of the browser for which to skip tests).
 		safari: [ 'italicStartingText', 'multipleStylesSingleLine', 'multipleStylesMultiline' ] // Skip due to spacing issue (#13).

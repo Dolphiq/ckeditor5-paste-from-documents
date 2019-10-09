@@ -3,7 +3,7 @@
  * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
-import PasteFromOffice from '../src/pastefromoffice';
+import Pastefromdocuments from '../src/pastefromdocuments';
 import Clipboard from '@ckeditor/ckeditor5-clipboard/src/clipboard';
 import VirtualTestEditor from '@ckeditor/ckeditor5-core/tests/_utils/virtualtesteditor';
 import HtmlDataProcessor from '@ckeditor/ckeditor5-engine/src/dataprocessor/htmldataprocessor';
@@ -19,7 +19,7 @@ describe( 'PasteFromOffice', () => {
 
 	beforeEach( () => {
 		return VirtualTestEditor.create( {
-			plugins: [ PasteFromOffice, Paragraph ]
+			plugins: [ Pastefromdocuments, Paragraph ]
 		} )
 			.then( _editor => {
 				editor = _editor;
@@ -29,11 +29,11 @@ describe( 'PasteFromOffice', () => {
 	} );
 
 	it( 'should be loaded', () => {
-		expect( pasteFromOffice ).to.be.instanceOf( PasteFromOffice, Paragraph );
+		expect( pasteFromOffice ).to.be.instanceOf( Pastefromdocuments, Paragraph );
 	} );
 
 	it( 'has proper name', () => {
-		expect( PasteFromOffice.pluginName ).to.equal( 'PasteFromOffice' );
+		expect( Pastefromdocuments.pluginName ).to.equal( 'PasteFromOffice' );
 	} );
 
 	it( 'should load Clipboard plugin', () => {
