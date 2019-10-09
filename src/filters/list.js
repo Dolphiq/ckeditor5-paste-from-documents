@@ -1,6 +1,6 @@
 /**
  * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md.
+ * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
 /**
@@ -82,6 +82,27 @@ export function transformListItemLikeElementsIntoLists( documentFragment, styles
 
 		writer.appendChild( listItem, currentList );
 	} );
+}
+
+/**
+ * Removes paragraph wrapping content inside a list item.
+ *
+ * @param {module:engine/view/documentfragment~DocumentFragment} documentFragment
+ * @param {module:engine/view/upcastwriter~UpcastWriter} writer
+ */
+export function unwrapParagraphInListItem( documentFragment, writer ) {
+	for ( const value of writer.createRangeIn( documentFragment ) ) {
+		const element = value.item;
+
+		if ( element.is( 'li' ) ) {
+			// Google Docs allows on single paragraph inside LI.
+			const firstChild = element.getChild( 0 );
+
+			if ( firstChild.is( 'p' ) ) {
+				writer.unwrapElement( firstChild );
+			}
+		}
+	}
 }
 
 // Finds all list-like elements in a given document fragment.
@@ -282,7 +303,11 @@ function belongsToTheSameList( previousItem, currentItem ) {
 	}
 
 	// Even with the same id the list does not have to be continuous (#43).
-	return !previousSibling.is( 'ul' ) && !previousSibling.is( 'ol' );
+	return !isList( previousSibling );
+}
+
+function isList( element ) {
+	return element.is( 'ol' ) || element.is( 'ul' );
 }
 
 // Calculates the indentation difference between two given list items (based on indent attribute

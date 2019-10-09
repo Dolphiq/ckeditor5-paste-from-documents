@@ -1,6 +1,6 @@
 /**
  * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md.
+ * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
 /**
@@ -17,10 +17,17 @@
  * @returns {String} Input HTML with spaces normalized.
  */
 export function normalizeSpacing( htmlString ) {
-	return normalizeSafariSpaceSpans( normalizeSafariSpaceSpans( htmlString ) ) // Run normalization two times to cover nested spans.
+	// Run normalizeSafariSpaceSpans() two times to cover nested spans.
+	return normalizeSafariSpaceSpans( normalizeSafariSpaceSpans( htmlString ) )
+		// Remove all \r\n from "spacerun spans" so the last replace line doesn't strip all whitespaces.
+		.replace( /(<span style=['"]mso-spacerun:yes['"]>[\s]*?)[\r\n]+(\s*<\/span>)/g, '$1$2' )
+		.replace( /<span style=['"]mso-spacerun:yes['"]><\/span>/g, '' )
 		.replace( / <\//g, '\u00A0</' )
 		.replace( / <o:p><\/o:p>/g, '\u00A0<o:p></o:p>' )
-		.replace( />(\s*(\r\n?|\n)\s*)+</g, '><' );
+		// Remove <o:p> block filler from empty paragraph. Safari uses \u00A0 instead of &nbsp;.
+		.replace( /<o:p>(&nbsp;|\u00A0)<\/o:p>/g, '' )
+		// Remove all whitespaces when they contain any \r or \n.
+		.replace( />(\s*[\r\n]\s*)</g, '><' );
 }
 
 /**
@@ -54,4 +61,3 @@ function normalizeSafariSpaceSpans( htmlString ) {
 		return spaces.length === 1 ? ' ' : Array( spaces.length + 1 ).join( '\u00A0 ' ).substr( 0, spaces.length );
 	} );
 }
-

@@ -1,15 +1,21 @@
 /**
  * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md.
+ * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
 import HtmlDataProcessor from '@ckeditor/ckeditor5-engine/src/dataprocessor/htmldataprocessor';
 import { stringify } from '@ckeditor/ckeditor5-engine/src/dev-utils/view';
 
-import { transformListItemLikeElementsIntoLists } from '../../src/filters/list';
+import View from '@ckeditor/ckeditor5-engine/src/view/view';
+import UpcastWriter from '@ckeditor/ckeditor5-engine/src/view/upcastwriter';
 
-describe( 'Filters', () => {
-	describe( 'list', () => {
+import {
+	transformListItemLikeElementsIntoLists,
+	unwrapParagraphInListItem
+} from '../../src/filters/list';
+
+describe( 'PasteFromOffice - filters', () => {
+	describe( 'list - paste from MS Word', () => {
 		const htmlDataProcessor = new HtmlDataProcessor();
 
 		describe( 'transformListItemLikeElementsIntoLists()', () => {
@@ -159,6 +165,62 @@ describe( 'Filters', () => {
 						`</li><li ${ level1 }>Bar` +
 							`<ol><li ${ level2 }>Baz</li></ol></li></ol>` );
 				} );
+			} );
+		} );
+	} );
+
+	describe( 'list - paste from google docs', () => {
+		const htmlDataProcessor = new HtmlDataProcessor();
+		let writer;
+
+		before( () => {
+			writer = new UpcastWriter();
+		} );
+
+		describe( 'unwrapParagraphInListItem', () => {
+			it( 'should remove paragraph from list item remaining nested elements', () => {
+				const inputData = '<ul><li><p>foo</p></li><li><p><span>bar</span></p></li></ul>';
+				const documentFragment = htmlDataProcessor.toView( inputData );
+
+				unwrapParagraphInListItem( documentFragment, writer );
+
+				expect( htmlDataProcessor.toData( documentFragment ) ).to.equal(
+					'<ul><li>foo</li><li><span>bar</span></li></ul>'
+				);
+			} );
+
+			it( 'should remove paragraph from nested list', () => {
+				const inputData = '<ul>' +
+						'<li>' +
+							'<p>one</p>' +
+							'<ol>' +
+								'<li>' +
+									'<p>two</p>' +
+									'<ul>' +
+										'<li>' +
+											'<p>three</p>' +
+										'</li>' +
+									'</ul>' +
+								'</li>' +
+							'</ol>' +
+						'</li>' +
+					'</ul>';
+				const documentFragment = htmlDataProcessor.toView( inputData );
+
+				unwrapParagraphInListItem( documentFragment, writer );
+
+				expect( htmlDataProcessor.toData( documentFragment ) ).to.equal(
+					'<ul><li>one<ol><li>two<ul><li>three</li></ul></li></ol></li></ul>'
+				);
+			} );
+
+			it( 'should do nothing for correct lists', () => {
+				const inputData = '<ol><li>foo</li><li>bar<ul><li>baz</li></ul></li></ol>';
+				const documentFragment = htmlDataProcessor.toView( inputData );
+
+				unwrapParagraphInListItem( documentFragment, writer );
+
+				expect( htmlDataProcessor.toData( documentFragment ) ).to.equal( '<ol><li>foo</li><li>bar<ul><li>baz</li></ul></li></ol>' );
 			} );
 		} );
 	} );

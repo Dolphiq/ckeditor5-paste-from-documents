@@ -1,6 +1,6 @@
 /**
  * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md.
+ * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
 import VirtualTestEditor from '@ckeditor/ckeditor5-core/tests/_utils/virtualtesteditor';
@@ -12,7 +12,7 @@ import { parseHtml } from '../../src/filters/parse';
 import { replaceImagesSourceWithBase64, _convertHexToBase64 } from '../../src/filters/image';
 import { browserFixtures } from '../_data/image/index';
 
-describe( 'Filters', () => {
+describe( 'PasteFromOffice - filters', () => {
 	describe( 'image', () => {
 		let editor;
 

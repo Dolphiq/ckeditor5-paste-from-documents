@@ -1,6 +1,6 @@
 /**
  * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md.
+ * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
 /* globals CSSStyleSheet */
@@ -9,7 +9,7 @@ import DocumentFragment from '@ckeditor/ckeditor5-engine/src/view/documentfragme
 
 import { parseHtml } from '../../src/filters/parse';
 
-describe( 'Filters', () => {
+describe( 'PasteFromOffice - filters', () => {
 	describe( 'parse', () => {
 		describe( 'parseHtml()', () => {
 			it( 'correctly parses HTML with body and one style tag', () => {

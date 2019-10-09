@@ -1,6 +1,6 @@
 /**
  * @license Copyright (c) 2003-2019, CKSource - Frederico Knabben. All rights reserved.
- * For licensing, see LICENSE.md.
+ * For licensing, see LICENSE.md or https://ckeditor.com/legal/ckeditor-oss-license
  */
 
 /* globals console, window, document */
@@ -32,6 +32,7 @@ ClassicEditor
 	} )
 	.then( editor => {
 		window.editor = editor;
+
 		const clipboard = editor.plugins.get( 'Clipboard' );
 
 		editor.editing.view.document.on( 'paste', ( evt, data ) => {
