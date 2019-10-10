@@ -59,7 +59,7 @@ export default class PasteFromDocuments extends Plugin {
 				if ( data.isTransformedWithPasteFromOffice ) {
 					return;
 				}
-
+				// console.log('past event!')
 				const htmlString = data.dataTransfer.getData( 'text/html' );
 				const activeNormalizer = normalizers.find( normalizer => normalizer.isActive( htmlString ) );
 

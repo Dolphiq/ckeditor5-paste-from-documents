@@ -251,9 +251,19 @@ function getListItemData( element ) {
 	const listStyle = element.getStyle( 'mso-list' );
 
 	if ( listStyle ) {
-		data.id = parseInt( listStyle.match( /(^|\s+)l(\d+)/i )[ 2 ] );
-		data.order = parseInt( listStyle.match( /\s*lfo(\d+)/i )[ 1 ] );
-		data.indent = parseInt( listStyle.match( /\s*level(\d+)/i )[ 1 ] );
+
+	    let getId = listStyle.match( /(^|\s+)l(\d+)/i );
+	    if (getId != null && typeof getId === 'object' && getId.length >= 2) {
+            data.id = parseInt( getId[ 2 ] );
+            data.order = parseInt( listStyle.match( /\s*lfo(\d+)/i )[ 1 ] );
+            data.indent = parseInt( listStyle.match( /\s*level(\d+)/i )[ 1 ] );
+        } else
+        {
+
+        }
+
+
+
 	}
 
 	return data;

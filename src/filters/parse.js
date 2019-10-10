@@ -12,6 +12,7 @@
 import DomConverter from '@ckeditor/ckeditor5-engine/src/view/domconverter';
 
 import { normalizeSpacing, normalizeSpacerunSpans } from './space';
+import { removeExtraBreaks } from '@dolphiq/ckeditor5-paste-from-documents/src/filters/break';
 
 /**
  * Parses provided HTML extracting contents of `<body>` and `<style>` tags.
@@ -31,8 +32,8 @@ export function parseHtml( htmlString ) {
 	// Remove Word specific "if comments" so content inside is not omitted by the parser.
 	htmlString = htmlString.replace( /<!--\[if gte vml 1]>/g, '' );
 
-	const normalizedHtml = normalizeSpacing( cleanContentAfterBody( htmlString ) );
-
+	const normalizedHtml = removeExtraBreaks( normalizeSpacing( cleanContentAfterBody( htmlString ) ) );
+    // console.log('normalizedHtml', normalizedHtml);
 	// Parse htmlString as native Document object.
 	const htmlDocument = domParser.parseFromString( normalizedHtml, 'text/html' );
 
@@ -41,9 +42,9 @@ export function parseHtml( htmlString ) {
 	// Get `innerHTML` first as transforming to View modifies the source document.
 	const bodyString = htmlDocument.body.innerHTML;
 
+	// console.log(bodyString);
 	// Transform document.body to View.
 	const bodyView = documentToView( htmlDocument );
-
 	// Extract stylesheets.
 	const stylesObject = extractStyles( htmlDocument );
 
