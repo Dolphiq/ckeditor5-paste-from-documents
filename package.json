@@ -1,6 +1,6 @@
 {
   "name": "@dolphiq/ckeditor5-paste-from-documents",
-  "version": "11.2",
+  "version": "11.2.0",
   "description": "Paste from Documents feature for CKEditor 5.",
   "keywords": [
     "ckeditor",
