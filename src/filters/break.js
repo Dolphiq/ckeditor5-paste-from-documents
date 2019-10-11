@@ -8,6 +8,6 @@ export function removeExtraBreaks( htmlString ) {
             .replace(/<p[^>]*><b[^>]*><\/b><\/p>/g, '')
             .replace(/<\/b><\/p><p[^>]*>/g, '<\/b><br>') // use BR after b line
             .replace(/<\/i><\/p><p[^>]*>/g, '<\/i><br>') // use BR after i line
-
+			.replace(/<p[^>]*><br[^>]*><\/p>/g, '')
         + '';
 }
